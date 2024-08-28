@@ -14,7 +14,7 @@ module.exports = {
 
         //convert processed templates to respectiv scripts 
         await writeFile(join(path, 'src', 'logger.js'), loggerTemplate);
-        await writeFile(join(path, 'src', 'prettier.json'), prettierTemplate);
+        await writeFile(join(path, 'prettier.json'), prettierTemplate);
         await writeFile(join(path, 'src', 'tests', 'app.spec.js'), testTemplate);
         await writeFile(join(path, 'src', 'app.js'), appTemplate);
         await writeFile(join(path, '.gitignore'), 'node_modules');

@@ -3,12 +3,12 @@ const handler = require('../app.js');
 
 describe('Unit Testing', () => {
 
-    test('Happy Flow', () => {
+    test('Happy Flow',async () => {
       await handler();
       
     });
   
-    test('Failed case', () => {
+    test('Failed case',async () => {
         await handler();
     });
 }) 

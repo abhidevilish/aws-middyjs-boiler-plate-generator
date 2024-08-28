@@ -1,7 +1,8 @@
 const middy = require('@middy/core');
 const eventNormalizer = require('@middy/event-normalizer');
-const log = require('./loggger.js')
-const handler = async middy ((event,context) => {
+const log = require('./loggger.js');
+
+const handler =  middy ((event,context) => {
     try {
       const { Records }  = event
       for (const record of Records) {
