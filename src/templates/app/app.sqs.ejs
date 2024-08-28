@@ -1,0 +1,19 @@
+const middy = require('@middy/core');
+const eventNormalizer = require('@middy/event-normalizer');
+const log = require('./loggger.js')
+const handler = async middy ((event,context) => {
+    try {
+      const { Records }  = event
+      for (const record of Records) {
+        const body = JSON.parse(record.body); 
+        //Add your business logic here
+        
+      }
+    }catch (error) {
+        log.error('Error processing message:', error);
+        throw error;
+    }
+} ) 
+
+handler
+  .use(eventNormalizer())

@@ -1,0 +1,21 @@
+{
+  "name": "aws-lambda-generator",
+  "version": "1.0.0",
+  "description": "generate aws-lambda",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "generate"
+  ],
+  "author": "Abhishek Prasad",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "inquirer": "^8.2.6"
+  }
+}
