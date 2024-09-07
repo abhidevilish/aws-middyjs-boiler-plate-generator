@@ -1,0 +1,28 @@
+import { PutObjectCommand, S3Client  } from '@aws-sdk/client-s3';
+import log from '../logger.mjs';
+const client = new S3Client();
+
+
+const s3Write = () => {
+  return {
+    after: async (handler) => {
+      const { response, event } = handler;
+      const { s3WriteRequest } = response;
+      for (const request of s3WriteRequest) {
+        const { Bucket, Key,Body } = request;
+        const command = {
+          Bucket,
+          Key,
+          Body : JSON.stringify(Body)
+        };
+        await client.send(new PutObjectCommand(command));
+      }
+    },
+    onError: async (handler) => {
+      log.error(handler.error.stack);
+      throw handler.error;
+    },
+  };
+};
+
+export default s3Write;

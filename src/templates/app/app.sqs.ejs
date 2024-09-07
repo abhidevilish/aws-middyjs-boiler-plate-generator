@@ -1,6 +1,10 @@
-const middy = require('@middy/core');
-const eventNormalizer = require('@middy/event-normalizer');
-const log = require('./loggger.js');
+import middy from '@middy/core';
+import eventNormalizer from '@middy/event-normalizer';
+import log from './loggger.mjs';
+<% if(ssmString.length){%>import ssm from '@middy/ssm'<%}%>
+<% if(sqsString.length){%>import sendMessage from './utils/sendMessageMiddleware.mjs'<%}%>
+<% if(s3String.length){%>import s3Write from './utils/s3.mjs';<%}%>
+
 
 const handler =  middy ((event,context) => {
     try {
@@ -10,6 +14,7 @@ const handler =  middy ((event,context) => {
         //Add your business logic here
         
       }
+      return {<%-sqsString%>,<%-s3String%>}
     }catch (error) {
         log.error('Error processing message:', error);
         throw error;
@@ -18,3 +23,6 @@ const handler =  middy ((event,context) => {
 
 handler
   .use(eventNormalizer())
+  <%-ssmString%>
+  <% if(sqsString.length){%>.use(sendMessage())<%}%>
+  <% if(s3String.length){%>.use(s3Write())<%}%>

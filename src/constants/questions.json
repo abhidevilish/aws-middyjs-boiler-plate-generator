@@ -1,25 +1,25 @@
 [
-    {
-        "type": "input",
-        "name": "name",
-        "message": "What is the name of your package?",
-        "default": "my-package"
-    },
-    {
-        "type": "input",
-        "name": "description",
-        "message": "What is the description?",
-        "default": ""
-    },
-    {
-        "type": "input",
-        "name": "keywords",
-        "message": "Enter keywords (comma-separated):"
-    },
-    {
-        "type": "input",
-        "name": "author",
-        "message": "Who is the author?",
-        "default": ""
-    }
+  {
+    "type": "input",
+    "name": "name",
+    "message": "What is the name of your package?",
+    "default": "my-package"
+  },
+  {
+    "type": "input",
+    "name": "description",
+    "message": "What is the description?",
+    "default": ""
+  },
+  {
+    "type": "input",
+    "name": "keywords",
+    "message": "Enter keywords (comma-separated):"
+  },
+  {
+    "type": "input",
+    "name": "author",
+    "message": "Who is the author?",
+    "default": ""
+  }
 ]

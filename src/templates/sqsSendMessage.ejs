@@ -1,0 +1,27 @@
+import { SendMessageCommand, SQSClient } from '@aws-sdk/client-sqs';
+import log from '../logger.mjs';
+const client = new SQSClient();
+
+const sendMessageMiddleware = () => {
+  return {
+    after: async (handler) => {
+      const { response, event } = handler;
+      const { queueParams } = response;
+      for (const message of queueParams) {
+        const { url, sqsMessage } = message;
+        const command = {
+          QueueUrl: url,
+          DelaySeconds: 10,
+          MessageBody: sqsMessage,
+        };
+        await client.send(new SendMessageCommand(command));
+      }
+    },
+    onError: async (handler) => {
+      log.error(handler.error.stack);
+      throw handler.error;
+    },
+  };
+};
+
+export default sendMessageMiddleware;

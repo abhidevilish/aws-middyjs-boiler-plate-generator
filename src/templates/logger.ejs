@@ -1,5 +1,5 @@
-const { createLogger, format, transports } = require('winston');
-const logger = createLogger({
+import { createLogger, format, transports }  from 'winston';
+const log = createLogger({
 transports: [
 new transports.Console({
 level: 'info',
@@ -7,3 +7,4 @@ format: format.combine(format.errors({stack:true}))
 }),
 ]
 })
+export default log

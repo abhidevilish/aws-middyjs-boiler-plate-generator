@@ -1,14 +1,40 @@
-const { mockClient } = require('aws-sdk-client-mock');
-const handler = require('../app.js');
+import { mockClient } from 'aws-sdk-client-mock';
+import handler from '../app.js';
+<% if(sqsString.length){%>import { SendMessageCommand, SQSClient}  from '@aws-sdk/client-sqs';<%}%>
+<% if(s3String.length){%>import { PutObjectCommand, S3Client}  from '@aws-sdk/client-s3';<%}%>
+
+
+//write mocks
+
+<% if(ssmString.length){%>jest.mock('@middy/ssm', () => {
+  // Return a mock implementation for ssm middleware
+  return () => ({
+    before: jest.fn(),
+    onError :jest.fn()
+  });
+});<%}%>
+<% if(sqsString.length){%>const sqsMock = mockClient(SQSClient);<%}%>
+<% if(s3String.length){%>const s3Mock = mockClient(S3Client);<%}%>
 
 describe('Unit Testing', () => {
+  beforeEach(() => {
+    <% if(sqsString.length){%>sqsMock.reset();<%}%>
+    <% if(s3String.length){%>s3Mock.reset();<%}%>
+    <% if(ssmString.length){%>jest.clearAllMocks();<%}%>
+  });
 
     test('Happy Flow',async () => {
+      
+      <% if(sqsString.length){%>sqsMock.on(SendMessageCommand).resolves(true);<%}%>
+      <% if(s3String.length){%>s3Mock.on(PutObjectCommand).resolves(true);<%}%>
       await handler();
       
     });
   
     test('Failed case',async () => {
-        await handler();
+      
+      <% if(sqsString.length){%>sqsMock.on(SendMessageCommand).resolves(true);<%}%>
+      <% if(s3String.length){%>s3Mock.on(PutObjectCommand).resolves(true);<%}%>
+      await handler();
     });
 }) 
