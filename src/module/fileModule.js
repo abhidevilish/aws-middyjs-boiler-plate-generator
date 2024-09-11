@@ -14,7 +14,7 @@ module.exports = {
       version: "1.0.0",
       main: "app.js",
       scripts: {
-        test: "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+        test: "node  node_modules/jest/bin/jest.js  --no-cache --verbose",
         format: "prettier --write .",
       },
       type : "module",
